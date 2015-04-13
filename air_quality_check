@@ -1,0 +1,18 @@
+#!/bin/bash
+
+url=http://aqicn.org/city/korea/seoul/gangnam-gu/
+
+if (( $# > 0 )); then
+	if [ "$1" = "seoul" ]; then
+	  url="http://aqicn.org/city/korea/seoul/gangnam-gu/"
+	elif [ "$1" = "beijing" ]; then
+	  url="http://aqicn.org/city/beijing/"
+	elif [ "$1" = "sydney" ]; then
+	  url="http://aqicn.org/city/australia/nsw/lindfield/sydneyeast/"
+	elif [ "$1" = "sanfrancisco" ]; then
+	  url="http://aqicn.org/?city=California/SanFrancisco/SanFrancisco-ArkansasStreet"
+	fi
+fi
+
+/usr/local/bin/wget  --header="Accept: text/html" --user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0"  $url -O -  2> /tmp/aqicn-wget.log  | python /Users/seojinko/Dropbox/bin/aqicn-parse.py  2>> /tmp/airquality.log
+
